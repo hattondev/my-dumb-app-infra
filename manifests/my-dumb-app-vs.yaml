@@ -1,0 +1,22 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: my-dumb-app-vs
+  labels:
+    app: my-dumb-app
+    version: 0.0.1
+    backstage.io/kubernetes-id: my-dumb-app
+spec:
+  gateways:
+  - istio-gateway/apps-gateway
+  hosts:
+  - my-dumb-app.apps.wwtlab.net
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: my-dumb-app-svc
+        port:
+          number: 80
+      weight: 100

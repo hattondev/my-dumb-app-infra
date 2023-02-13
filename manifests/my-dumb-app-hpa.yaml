@@ -1,0 +1,16 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-dumb-app-hpa
+  labels:
+    app: my-dumb-app
+    version: 0.0.1
+    backstage.io/kubernetes-id: my-dumb-app
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: my-dumb-app
+ minReplicas: 1
+ maxReplicas: 4
+ targetCPUUtilizationPercentage: 75
